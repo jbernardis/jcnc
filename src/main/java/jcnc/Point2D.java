@@ -7,5 +7,9 @@ public class Point2D {
 		x = px;
 		y = py;
 	}
+	
+	public String toString() {
+		return "PT:(" + x + ", " + y + ")";
+	}
 }
 

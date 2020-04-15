@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
+import main.java.jcnc.box.TabbedBox;
 import main.java.jcnc.carvings.DiamondCarve;
 import main.java.jcnc.carvings.GridCarve;
 import main.java.jcnc.carvings.HatchCarve;
@@ -135,6 +136,15 @@ public class shapeoko {
 		Button b13 = createButton("carvehatch", d, carveButtons);
 		b13.setToolTipText("Generate G Code for a Crosshatch carve pattern");
 		
+		Group objectButtons = new Group(shell, SWT.NULL);
+		objectButtons.setText(" Objects ");
+		GridLayout obgl = new GridLayout();
+		obgl.numColumns = 5;
+		obgl.makeColumnsEqualWidth = true;
+		objectButtons.setLayout(obgl);
+		
+		Button b14 = createButton("tabbedbox", d, objectButtons);
+		b14.setToolTipText("Generate G Code for a tabbed box");
 		
 		SelectionAdapter bPress = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
@@ -156,6 +166,7 @@ public class shapeoko {
 		b11.addSelectionListener(bPress);
 		b12.addSelectionListener(bPress);
 		b13.addSelectionListener(bPress);
+		b14.addSelectionListener(bPress);
 
 		
 		shell.layout(true, true);
@@ -360,6 +371,11 @@ public class shapeoko {
 		}
 		else if (dlgName.contentEquals("carvehatch")) {
 			HatchCarve dlg = new HatchCarve(shell, props);
+			dlg.open();
+		}
+		
+		else if (dlgName.contentEquals("tabbedbox")) {
+			TabbedBox dlg = new TabbedBox(shell, props);
 			dlg.open();
 		}
 		// addspeed can be changed inside of the dialogs, so we assert menu value here
